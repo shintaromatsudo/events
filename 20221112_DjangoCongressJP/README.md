@@ -1,0 +1,1 @@
+- slide: [manage.py 深掘り](https://docs.google.com/presentation/d/1pco7ey3I1Eqa_f2MM8a5ziwAKnZHCm92GGweEBQYJ8c/edit#slide=id.g184278461a4_1_151)
