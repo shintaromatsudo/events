@@ -1,0 +1,14 @@
+services:
+  pycon_db:
+    image: postgres:16
+    container_name: pycon_db
+    ports:
+      - 5432:5432
+    volumes:
+      - pycon-db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+volumes:
+  pycon-db:

@@ -1,0 +1,15 @@
+services:
+  pycon_db:
+    image: mariadb:11
+    container_name: pycon-db
+    ports:
+      - 3306:3306
+    volumes:
+      - pycon-db-data:/var/lib/mariadb
+    environment:
+      MARIADB_ROOT_PASSWORD: maria
+      MARIADB_DATABASE: maria
+      MARIADB_USER: maria
+      MARIADB_PASSWORD: maria
+volumes:
+  pycon-db-data:

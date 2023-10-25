@@ -1,0 +1,15 @@
+services:
+  pycon_db:
+    image: postgres:15
+    container_name: pycon_db
+    command: postgres -c log_destination=stderr -c log_statement=all
+    ports:
+      - 5432:5432
+    volumes:
+      - pycon-db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+volumes:
+  pycon-db:

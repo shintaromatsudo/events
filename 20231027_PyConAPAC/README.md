@@ -1,0 +1,1 @@
+- slide: [How does Python Connects to RDB](https://docs.google.com/presentation/d/1YTWwhPw3rMiIsJAweAHkWHSo09GkW18RtUSyMpYX1fs/edit?usp=sharing)
