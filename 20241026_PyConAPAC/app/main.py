@@ -24,8 +24,9 @@ if __name__ == "__main__":
             s = Schedule()
             s.auth()
             response = s.execute(text)
-            response = gen_ai.generate_content("please say my schedule" + response)
+            print(response)
+            response = gen_ai.generate_content("please answer by natural language" + response)
         else:
-            response = gen_ai.generate_content(text)
+            response = gen_ai.generate_content("please answer by natural language" + text)
         print(response)
         tts.say(response)
