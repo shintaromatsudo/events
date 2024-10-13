@@ -1,8 +1,5 @@
 # events
 
-## 2022
-
-
 | Date | Document | Event |
 --|--|--
 | Nov 12 | [20221112_DjangoCongressJP](./20221112_DjangoCongressJP) | https://djangocongress.jp/ |

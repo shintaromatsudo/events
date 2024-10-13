@@ -6,21 +6,20 @@ class SpeechRecognizer:
         self.mic = sr.Microphone()
 
     def grab_audio(self) -> sr.AudioData:
-        print("何か話してください...")
+        print("Listening...")
         with self.mic as source:
             self.recognizer.adjust_for_ambient_noise(source)
             audio = self.recognizer.listen(source)
         return audio
 
-    def recognize_audio(self, audio: sr.AudioData) -> str:
-        print ("認識中...")
+    def recognize_audio(self, audio: sr.AudioData) -> str | None:
+        print ("Recognizing...")
         try:
-            speech = self.recognizer.recognize_google(audio, language="en-US")
+            return self.recognizer.recognize_google(audio, language="en-US")
         except sr.UnknownValueError:
-            speech = f"#認識できませんでした"
+            print("Could not understand audio")
         except sr.RequestError as e:
-            speech = f"#音声認識のリクエストが失敗しました:{e}"
-        return speech
+            print(f"An error occurred: {e}")
 
     def speech_to_text(self):
         audio = self.grab_audio()
@@ -29,3 +28,8 @@ class SpeechRecognizer:
         print(speech)
 
         return speech
+
+if __name__ == "__main__":
+    sr = SpeechRecognizer()
+    while True:
+        sr.speech_to_text()
