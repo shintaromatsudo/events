@@ -1,0 +1,40 @@
+#vscode
+https://pimylifeup.com/raspberry-pi-visual-studio-code/
+
+# uv
+https://docs.astral.sh/uv/getting-started/installation/
+curl -LsSf https://astral.sh/uv/install.sh | sh
+source $HOME/.cargo/env
+uv python pin 3.12
+uv venv
+source .venv/bin/activate
+deactivate
+
+uv pip install -r requirements.txt
+
+# PyAudio
+This error likely indicates that you need to install a library that provides "portaudio.h" for pyaudio@0.2.14
+
+sudo apt install portaudio19-dev
+
+libasound2-dev : Depends: libasound2 (= 1.2.8-1+b1) but 1.2.8-1+rpt1 is to be installed
+
+sudo apt autoremove libasound2
+sudo apt install libasound2-dev
+
+# pyttsx3
+sudo apt install espeak ffmpeg libespeak1
+
+# speech recognition
+sudo apt install flac
+
+sudo apt instal alsa-utils
+arecord | aplay
+
+
+sudo apt purge espeak
+sudo apt autoremove
+sudo apt install espeak-ng
+cd /usr/lib/i36-linux-gnu/
+sudo ln -s libespeak-ng.so.1 libspeak.so.1
+cd /usr/lib/aarch64-linux-gnu/
