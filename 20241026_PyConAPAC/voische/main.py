@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from genai import GenAI
+from gen_ai import GenAI
 from schedule import Schedule
 from sr import SpeechRecognizer
 from tts import TTS
@@ -24,7 +24,6 @@ if __name__ == "__main__":
             s = Schedule()
             s.auth()
             response = s.execute(text)
-            print(response)
             response = gen_ai.generate_content("please answer by natural language" + response)
         else:
             response = gen_ai.generate_content("please answer by natural language" + text)
