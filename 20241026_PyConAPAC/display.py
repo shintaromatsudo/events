@@ -7,13 +7,16 @@ from machine import Pin, SPI
 import ssd1306
 import time
 
+g = Pin(25, Pin.OUT)
+g.value(0)
+
 # Uses SPI port 0
 spi_port = 0
 MOSI = 19     # blue
 CLK = 18      # yellow
 CS = 22       # orange
 DC = 21       # green
-RST = 15      # white   #NB MISO not used
+RST = 20      # white   #NB MISO not used
 
 WIDTH = 128
 HEIGHT = 64
@@ -49,12 +52,12 @@ while True:
             oled.show()
             time.sleep(0.1)
     
-# oled.fill(0)
+oled.fill(0)
+
+oled.text("Hello Misa!!", 5, 6, 1)
+oled.text('Sara', 5, 16, 1)
+oled.text('Reiri', 5, 26, 1)
+oled.text('WS 0.96" OLED', 5, 46, 1)
+oled.text("SSD1315 SPI", 5, 56, 1)
 # 
-# oled.text("Hello Misa!!", 5, 6, 1)
-# oled.text('Sara', 5, 16, 1)
-# oled.text('Reiri', 5, 26, 1)
-# oled.text('WS 0.96" OLED', 5, 46, 1)
-# oled.text("SSD1315 SPI", 5, 56, 1)
-# 
-# oled.show()
+oled.show()
