@@ -22,16 +22,17 @@ Author: n-elia
 """
 
 # Some ports need to import 'sleep' from 'time' module
-from machine import sleep, SoftI2C, Pin
+from machine import SoftI2C, Pin
 from utime import ticks_diff, ticks_us
+from time import sleep
 
 from max30102 import MAX30102, MAX30105_PULSE_AMP_MEDIUM
 
 
 def main():
     # I2C software instance
-    i2c = SoftI2C(sda=Pin(22),  # Here, use your I2C SDA pin
-                  scl=Pin(21),  # Here, use your I2C SCL pin
+    i2c = SoftI2C(sda=Pin(16),  # Here, use your I2C SDA pin
+                  scl=Pin(17),  # Here, use your I2C SCL pin
                   freq=400000)  # Fast: 400kHz, slow: 100kHz
 
     # Examples of working I2C configurations:

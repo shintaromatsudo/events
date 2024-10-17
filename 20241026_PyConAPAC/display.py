@@ -11,9 +11,9 @@ import time
 spi_port = 0
 MOSI = 19     # blue
 CLK = 18      # yellow
-CS = 17       # orange
-RST = 16      # white   #NB MISO not used
-DC = 20       # green
+CS = 22       # orange
+DC = 21       # green
+RST = 15      # white   #NB MISO not used
 
 WIDTH = 128
 HEIGHT = 64
@@ -32,27 +32,29 @@ oled = ssd1306.SSD1306_SPI(WIDTH,HEIGHT,
     cs=Pin(CS),
     external_vcc=False
     )
-    
-oled.fill(0)
-
-for x in range(64):
-    oled.fill(1)
-    oled.text("Pico", int(145 - x*3), 6, 0)
-    oled.show()
-    time.sleep(0.1)
-    
-oled.fill(0)
-oled.show()
 
 # Clear the oled display in case it has junk on it.
 oled.fill(0)
 
-# Add some text
-oled.text("Hello Misa!!", 5, 6, 1)
-oled.text('Sara', 5, 16, 1)
-oled.text('Reiri', 5, 26, 1)
-oled.text('WS 0.96" OLED', 5, 46, 1)
-oled.text("SSD1315 SPI", 5, 56, 1)
-
-# Finally update the oled display so the text is displayed
-oled.show()
+while True:
+    for i in range(2):
+        for x in range(80):
+            oled.fill(i)
+            oled.text("Hello PyCon APAC 2024", int(145 - x*4), 6, 1-i)
+            
+            oled.text('Yogyakarta, Indonesia', int(145 - x*4), 26, 1-i)
+            oled.text(' 25th-27th Oct, 2024', int(145 - x*4), 46, 1-i)
+            
+            # Finally update the oled display so the text is displayed
+            oled.show()
+            time.sleep(0.1)
+    
+# oled.fill(0)
+# 
+# oled.text("Hello Misa!!", 5, 6, 1)
+# oled.text('Sara', 5, 16, 1)
+# oled.text('Reiri', 5, 26, 1)
+# oled.text('WS 0.96" OLED', 5, 46, 1)
+# oled.text("SSD1315 SPI", 5, 56, 1)
+# 
+# oled.show()
