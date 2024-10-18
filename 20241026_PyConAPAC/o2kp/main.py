@@ -13,6 +13,7 @@ spo2_str_list = [
     "SpO2:-%",
     "SpO2:-%",
     "SpO2:-%",
+    "SpO2:-%",
 ]
 
 while True:
@@ -25,7 +26,7 @@ while True:
 
     spo2_str_list.insert(0, f"SpO2:{spo2}%")
 
-    spo2_str_list = spo2_str_list[:5]
+    spo2_str_list = spo2_str_list[:6]
 
     d.show(spo2_str_list)
 
