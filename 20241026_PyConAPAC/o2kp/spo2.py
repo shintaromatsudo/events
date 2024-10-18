@@ -7,10 +7,7 @@ from max30102 import MAX30102, MAX30105_PULSE_AMP_MEDIUM
 class Spo2:
     def __init__(self):
         # I2C software instance
-        i2c = SoftI2C(
-                  sda=Pin(14),
-                  scl=Pin(15),
-                  freq=400000)
+        i2c = SoftI2C(sda=Pin(14), scl=Pin(15), freq=400000)
 
         self.sensor = MAX30102(i2c=i2c)
 
@@ -43,7 +40,7 @@ class Spo2:
         self.sensor.set_fifo_average(8)
         # Set LED brightness to a medium value
         self.sensor.set_active_leds_amplitude(MAX30105_PULSE_AMP_MEDIUM)
-        
+
         self.ir_list = []
         self.red_list = []
 
@@ -52,19 +49,13 @@ class Spo2:
 
     def get_data(self):
         self.sensor.check()
-        
+
         ir = 0
         red = 0
 
         if self.sensor.available():
             ir = self.sensor.pop_ir_from_storage()
             red = self.sensor.pop_red_from_storage()
-            self.ir_list.append(ir)
-            self.red_list.append(red)
-            if len(self.ir_list) > 10:
-                del self.ir_list[0]
-            if len(self.red_list) > 10:
-                del self.red_list[0]
 
         return ir, red
 
@@ -81,4 +72,3 @@ if __name__ == "__main__":
         spo2 = s.get_spo2(ir, red)
         print('SpO2:', spo2, 'IR:', ir, 'Red:', red)
         sleep(1)
-        
