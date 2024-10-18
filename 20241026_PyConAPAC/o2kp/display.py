@@ -31,13 +31,10 @@ class Display:
 
         self.oled.fill(0)
 
-    def show(self, text1, text2, text3, text4, text5):
+    def show(self, text_list):
         self.oled.fill(0)
-        self.oled.text(text1, 5, 6, 1)
-        self.oled.text(text2, 5, 16, 1)
-        self.oled.text(text3, 5, 26, 1)
-        self.oled.text(text4, 5, 36, 1)
-        self.oled.text(text5, 5, 46, 1)
+        for i, t in enumerate(text_list):
+            self.oled.text(t, 5, 6 + 10 * i, 1)
         self.oled.show()
 
     def show_demo(self):
