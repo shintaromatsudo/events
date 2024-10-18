@@ -1,4 +1,4 @@
-from machine import SoftI2C, Pin
+from machine import SoftI2C, Pin, I2C
 from time import sleep
 
 from max30102 import MAX30102, MAX30105_PULSE_AMP_MEDIUM
@@ -7,9 +7,10 @@ from max30102 import MAX30102, MAX30105_PULSE_AMP_MEDIUM
 class Spo2:
     def __init__(self):
         # I2C software instance
-        i2c = SoftI2C(sda=Pin(16),  # Here, use your I2C SDA pin
-                        scl=Pin(17),  # Here, use your I2C SCL pin
-                        freq=400000)  # Fast: 400kHz, slow: 100kHz
+        i2c = SoftI2C(
+                  sda=Pin(14),
+                  scl=Pin(15),
+                  freq=400000)
 
         self.sensor = MAX30102(i2c=i2c)
 
@@ -42,26 +43,42 @@ class Spo2:
         self.sensor.set_fifo_average(8)
         # Set LED brightness to a medium value
         self.sensor.set_active_leds_amplitude(MAX30105_PULSE_AMP_MEDIUM)
+        
+        self.ir_list = []
+        self.red_list = []
 
         sleep(1)
 
-        return True
 
     def get_data(self):
         self.sensor.check()
+        
+        ir = 0
+        red = 0
 
         if self.sensor.available():
-            red = self.sensor.pop_red_from_storage()
             ir = self.sensor.pop_ir_from_storage()
+            red = self.sensor.pop_red_from_storage()
+            self.ir_list.append(ir)
+            self.red_list.append(red)
+            if len(self.ir_list) > 10:
+                del self.ir_list[0]
+            if len(self.red_list) > 10:
+                del self.red_list[0]
 
-        return red, ir
+        return ir, red
 
-    def get_spo2(self, red, ir):
-        return red / ir
+    def get_spo2(self, ir, red):
+        return round(red / ir * 100, 3)
 
 
 if __name__ == "__main__":
     s = Spo2()
     while True:
-        red, ir = s.get_data()
-        print("Red: ", red, "IR: ", ir)
+        ir, red = s.get_data()
+        if ir is None or red is None:
+            continue
+        spo2 = s.get_spo2(ir, red)
+        print('SpO2:', spo2, 'IR:', ir, 'Red:', red)
+        sleep(1)
+        

@@ -10,7 +10,7 @@ class Display:
         CLK = 18      # yellow 4
         CS = 22       # orange 5
         DC = 21       # green  6
-        RST = 15      # white  7
+        RST = 20      # white  7
 
         WIDTH = 128
         HEIGHT = 64
@@ -31,9 +31,13 @@ class Display:
 
         self.oled.fill(0)
 
-    def show(self, text):
+    def show(self, text1, text2, text3, text4, text5):
         self.oled.fill(0)
-        self.oled.text(text, 5, 6, 1)
+        self.oled.text(text1, 5, 6, 1)
+        self.oled.text(text2, 5, 16, 1)
+        self.oled.text(text3, 5, 26, 1)
+        self.oled.text(text4, 5, 36, 1)
+        self.oled.text(text5, 5, 46, 1)
         self.oled.show()
 
     def show_demo(self):
