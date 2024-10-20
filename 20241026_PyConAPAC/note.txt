@@ -1,4 +1,9 @@
-#vscode
+# Git認証
+cd ~/.ssh
+ssh-keygen -t rsa
+ssh -T git@github.com
+
+# vscode
 https://code.visualstudio.com/Download
 
 # uv
@@ -28,9 +33,18 @@ sudo apt install espeak ffmpeg libespeak1
 # speech recognition
 sudo apt install flac
 
+# audio setting
 sudo apt instal alsa-utils
+cp asoundrc.example ~/.asoundrc
 arecord | aplay
 
+# Gemini API
+https://ai.google.dev/gemini-api/docs/quickstart?lang=python
+
+# Calendar API
+https://console.cloud.google.com/apis/enableflow?apiid=calendar&hl=ja&project=vtec-268802
+make a credentials.json
+---
 
 sudo apt purge espeak
 sudo apt autoremove

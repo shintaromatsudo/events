@@ -1,0 +1,19 @@
+pcm.!default {
+    type asym
+    capture.pcm "input"
+    playback.pcm "output"
+}
+
+pcm.input {
+    type plug
+    slave {
+        pcm "hw:3,0"
+    }
+}
+
+pcm.output {
+    type plug
+    slave {
+        pcm "hw:2,0"
+    }
+}
