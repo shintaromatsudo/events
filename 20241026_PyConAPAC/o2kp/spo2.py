@@ -1,4 +1,4 @@
-from machine import SoftI2C, Pin, I2C
+from machine import SoftI2C, Pin
 from time import sleep
 
 from max30102 import MAX30102, MAX30105_PULSE_AMP_MEDIUM
