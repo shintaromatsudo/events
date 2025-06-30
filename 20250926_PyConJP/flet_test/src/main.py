@@ -1,10 +1,7 @@
-import os
 import flet as ft
 
 import polars as pl
 import io
-
-os.environ["FLET_SECRET_KEY"] = os.urandom(12).hex()
 
 
 def main(page: ft.Page):
