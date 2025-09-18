@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Pyodide 足し算サンプル</title>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.28.2/full/pyodide.js"></script>
+</head>
+
+<body>
+    <h1>Pyodide 足し算サンプル</h1>
+
+    <div>
+        <label for="num1">数値1:</label>
+        <input type="number" id="num1" value="1" oninput="calculate()">
+    </div>
+
+    <div>
+        <label for="num2">数値2:</label>
+        <input type="number" id="num2" value="3" oninput="calculate()">
+    </div>
+
+    <h3>結果: <span id="result">-</span></h3>
+
+    <script>
+        let pyodide;
+
+        async function initPyodide() {
+            pyodide = await loadPyodide();
+            console.log("Pyodide が読み込まれました");
+
+            // 初回計算
+            calculate();
+        }
+
+        async function calculate() {
+            if (!pyodide) {
+                document.getElementById('result').innerHTML =
+                    '<p style="color: red;">Pyodide が読み込まれています...</p>';
+                return;
+            }
+
+            const num1 = parseInt(document.getElementById('num1').value);
+            const num2 = parseInt(document.getElementById('num2').value);
+
+            // 入力値が無効な場合はスキップ
+            if (isNaN(num1) || isNaN(num2)) {
+                document.getElementById('result').innerHTML =
+                    '<p style="color: orange;">有効な数値を入力してください</p>';
+                return;
+            }
+
+            // 外部Pythonファイルを読み込んで実行
+            const response = await fetch('calculation.py');
+            const pythonCode = await response.text();
+            pyodide.runPython(pythonCode);
+
+            // 計算関数を呼び出し
+            pyodide.runPython(`
+                result = calculate(${num1}, ${num2})
+            `);
+
+            // Pythonから結果を取得
+            const result = pyodide.globals.get('result');
+
+            document.getElementById('result').textContent =
+                `${num1} + ${num2} = ${result}`;
+        }
+
+        // ページ読み込み時にPyodideを初期化
+        initPyodide();
+    </script>
+</body>
+
+</html>
