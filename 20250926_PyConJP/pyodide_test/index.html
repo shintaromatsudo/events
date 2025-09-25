@@ -20,7 +20,7 @@
         <input type="number" id="num2" value="3" oninput="calculate()">
     </div>
 
-    <h3>結果: <span id="result">-</span></h3>
+    <h3>結果: <span id="resultArea">-</span></h3>
 
     <script>
         let pyodide;
@@ -35,7 +35,7 @@
 
         async function calculate() {
             if (!pyodide) {
-                document.getElementById('result').innerHTML =
+                document.getElementById('resultArea').innerHTML =
                     '<p style="color: red;">Pyodide が読み込まれています...</p>';
                 return;
             }
@@ -45,7 +45,7 @@
 
             // 入力値が無効な場合はスキップ
             if (isNaN(num1) || isNaN(num2)) {
-                document.getElementById('result').innerHTML =
+                document.getElementById('resultArea').innerHTML =
                     '<p style="color: orange;">有効な数値を入力してください</p>';
                 return;
             }
@@ -63,7 +63,7 @@
             // Pythonから結果を取得
             const result = pyodide.globals.get('result');
 
-            document.getElementById('result').textContent =
+            document.getElementById('resultArea').textContent =
                 `${num1} + ${num2} = ${result}`;
         }
 
